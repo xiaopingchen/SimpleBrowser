@@ -77,12 +77,19 @@
     [progressHUD hide:YES afterDelay:0.5];
 }
 
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    progressHUD.labelText = @"Loading failed";
+    [progressHUD hide:YES];
+}
+
 
 #pragma mark - webrequest
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     [progressHUD hide:NO];
+    progressHUD.labelText = @"Loading";
     progressHUD.progress = 0.1;
     if (navigationType == UIWebViewNavigationTypeLinkClicked)
     {
