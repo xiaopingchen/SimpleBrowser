@@ -41,6 +41,7 @@
     
     webView =  [[UIWebView alloc] initWithFrame:self.view.frame];
     webView.delegate = self;
+    
     [self.view addSubview:webView];
     //[webView loadRequest: ];
     
