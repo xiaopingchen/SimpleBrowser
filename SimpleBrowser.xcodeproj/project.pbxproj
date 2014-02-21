@@ -24,6 +24,10 @@
 		82B291FC18B3440600680342 /* SimpleBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B291FB18B3440600680342 /* SimpleBrowserTests.m */; };
 		82B2920718B3442C00680342 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B2920618B3442C00680342 /* BrowserViewController.m */; };
 		82B2920A18B348E900680342 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B2920918B348E900680342 /* MBProgressHUD.m */; };
+		82B2925C18B7509700680342 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B2925B18B7509700680342 /* NJKWebViewProgress.m */; };
+		82B2925F18B7541A00680342 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 82B2925E18B7541A00680342 /* assets */; };
+		82B2926218B75BD200680342 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 82B2926018B75BD200680342 /* error.html */; };
+		82B2926318B75BD200680342 /* loaderror.gif in Resources */ = {isa = PBXBuildFile; fileRef = 82B2926118B75BD200680342 /* loaderror.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +64,11 @@
 		82B2920618B3442C00680342 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
 		82B2920818B348E900680342 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		82B2920918B348E900680342 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		82B2925A18B7509700680342 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
+		82B2925B18B7509700680342 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
+		82B2925E18B7541A00680342 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		82B2926018B75BD200680342 /* error.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = error.html; path = assets/error.html; sourceTree = "<group>"; };
+		82B2926118B75BD200680342 /* loaderror.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loaderror.gif; path = assets/loaderror.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +128,11 @@
 		82B291DC18B3440600680342 /* SimpleBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				82B2926018B75BD200680342 /* error.html */,
+				82B2926118B75BD200680342 /* loaderror.gif */,
+				82B2925E18B7541A00680342 /* assets */,
+				82B2925A18B7509700680342 /* NJKWebViewProgress.h */,
+				82B2925B18B7509700680342 /* NJKWebViewProgress.m */,
 				7A605A4718B5004E00EC2914 /* Default@2x.png */,
 				7A605A4518B4FFD500EC2914 /* Default.png */,
 				7A605A3F18B4FE2100EC2914 /* Default-568h@2x.png */,
@@ -241,6 +255,9 @@
 				82B291E118B3440600680342 /* InfoPlist.strings in Resources */,
 				82B291E918B3440600680342 /* Images.xcassets in Resources */,
 				7A605A4818B5004E00EC2914 /* Default@2x.png in Resources */,
+				82B2926318B75BD200680342 /* loaderror.gif in Resources */,
+				82B2925F18B7541A00680342 /* assets in Resources */,
+				82B2926218B75BD200680342 /* error.html in Resources */,
 				7A605A4018B4FE2100EC2914 /* Default-568h@2x.png in Resources */,
 				7A605A4618B4FFD500EC2914 /* Default.png in Resources */,
 			);
@@ -261,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82B2925C18B7509700680342 /* NJKWebViewProgress.m in Sources */,
 				82B291E718B3440600680342 /* AppDelegate.m in Sources */,
 				82B291E318B3440600680342 /* main.m in Sources */,
 				82B2920718B3442C00680342 /* BrowserViewController.m in Sources */,

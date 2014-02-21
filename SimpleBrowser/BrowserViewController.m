@@ -9,14 +9,12 @@
 #import "BrowserViewController.h"
 #import "MBProgressHUD.h"
 
+
 @interface BrowserViewController ()
 {
     UIWebView *webView;
+    NJKWebViewProgress *_progressProxy;
     MBProgressHUD *progressHUD;
-    long long totalLength;
-    double currentDownloadLength;
-    NSMutableData *htmlData;
-    NSURLConnection *requestConnection;
 }
 @end
 
@@ -36,17 +34,20 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
-    htmlData = [NSMutableData new];
+
     
     webView =  [[UIWebView alloc] initWithFrame:self.view.frame];
-    webView.delegate = self;
+    _progressProxy = [[NJKWebViewProgress alloc] init];
+    webView.delegate = _progressProxy;
+    _progressProxy.webViewProxyDelegate = self;
+    _progressProxy.progressDelegate = self;
     
     [self.view addSubview:webView];
     //[webView loadRequest: ];
-    
+    //
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://192.168.1.101:8090/jQueryMobile"]];
-    requestConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    [webView loadRequest:request];
+
     
     progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     progressHUD.mode = MBProgressHUDModeAnnularDeterminate;
@@ -54,68 +55,31 @@
 
 }
 
-#pragma mark - connection
-
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    currentDownloadLength += data.length;
-    [htmlData appendData:data];
-    progressHUD.progress = currentDownloadLength / (float)totalLength;
-    //[NSThread sleepForTimeInterval:10];
-    NSLog(@"progress:%f",progressHUD.progress);
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    totalLength = MAX(response.expectedContentLength,1);
-    currentDownloadLength = 0;
-    progressHUD.mode = MBProgressHUDModeDeterminate;
-}
-
--(void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    [webView loadData:htmlData MIMEType:nil textEncodingName:nil baseURL:nil];
-    [progressHUD hide:YES afterDelay:0.5];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    progressHUD.labelText = @"Loading failed";
-    [progressHUD hide:YES];
-}
-
-
-#pragma mark - webrequest
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    [progressHUD hide:NO];
-    progressHUD.labelText = @"Loading";
-    progressHUD.progress = 0.1;
-    if (navigationType == UIWebViewNavigationTypeLinkClicked)
-    {
-        [htmlData setLength:0];
-        requestConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-        
-        return NO;
-    }
+    NSLog(@"failed");
+    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"html" inDirectory:@"assets"];
+    NSString *htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
     
-    return YES;
+    [webView loadHTMLString:htmlString baseURL:nil];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-
+    [progressHUD hide:NO];
 }
 
--(void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
 {
-    
-}
-
--(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    
+    progressHUD.progress = progress;
+    if (progress == 0.0)
+    {
+        [progressHUD hide:NO];
+    }
+    else if (progress == 1.0)
+    {
+        [progressHUD hide:YES];
+    }
 }
 
 
