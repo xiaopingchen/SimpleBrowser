@@ -17,7 +17,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    BrowserViewController *browserVc = [[BrowserViewController alloc] init];
+    __strong BrowserViewController *browserVc = [[BrowserViewController alloc] initWithNibName:nil bundle:nil];
     self.window.rootViewController = browserVc;
     
     [self.window makeKeyAndVisible];

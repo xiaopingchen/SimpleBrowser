@@ -23,8 +23,9 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
+        NSLog(@"test");
     }
     return self;
 }
@@ -34,7 +35,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-
+   // NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"html" ];
+   // NSString *htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
     
     webView =  [[UIWebView alloc] initWithFrame:self.view.frame];
     _progressProxy = [[NJKWebViewProgress alloc] init];
@@ -58,10 +60,12 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     NSLog(@"failed");
-    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"html" inDirectory:@"assets"];
+    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"html" ];
     NSString *htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
     
-    [webView loadHTMLString:htmlString baseURL:nil];
+    NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+    NSURL *bundleBaseURL = [NSURL fileURLWithPath: bundlePath];
+    [webView loadHTMLString:htmlString baseURL:bundleBaseURL];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
